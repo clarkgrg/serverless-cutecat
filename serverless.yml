@@ -1,0 +1,20 @@
+service: cutecat 
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  stage: dev
+  region: us-east-1
+  environment: 
+    apiKey: ${file(./env.yml):secretKey}
+
+functions:
+  getcat:
+    handler: handler.getcat
+    events: 
+      - http: 
+          path: cutecat
+          method: get
+          cors: true
+
+
